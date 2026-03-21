@@ -25,7 +25,7 @@ spwStyle.innerHTML = `
   border-radius: 50px;
   background: linear-gradient(135deg, #E91E8C, #FF5722);
   box-shadow: 0 6px 28px rgba(233,30,140,0.35), 0 2px 8px rgba(0,0,0,0.12);
-  width: 265px;
+  width: 250px;
   max-width: calc(100vw - 32px);
   box-sizing: border-box;
   overflow: hidden;
