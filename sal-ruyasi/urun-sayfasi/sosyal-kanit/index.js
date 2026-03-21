@@ -3,8 +3,8 @@ var spwStyle = document.createElement('style');
 spwStyle.innerHTML = `
 #spw {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 70px;
+  right: 16px;
   z-index: 99999;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   opacity: 0;
@@ -17,12 +17,12 @@ spwStyle.innerHTML = `
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 11px 38px 11px 14px;
+  padding: 11px 34px 11px 14px;
   border-radius: 50px;
   background: linear-gradient(135deg, #E91E8C, #FF5722);
   box-shadow: 0 6px 28px rgba(233,30,140,0.35), 0 2px 8px rgba(0,0,0,0.12);
-  min-width: 230px;
-  max-width: calc(100vw - 40px);
+  min-width: 220px;
+  max-width: calc(100vw - 32px);
   overflow: hidden;
   cursor: default;
   user-select: none;
@@ -69,6 +69,7 @@ spwStyle.innerHTML = `
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100%;
 }
 .spw-msg-top b { font-size: 15px; font-weight: 800; }
 .spw-msg-sub {
@@ -76,6 +77,9 @@ spwStyle.innerHTML = `
   font-weight: 500;
   color: rgba(255,255,255,0.72);
   margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .spw-dot {
   display: inline-block;
@@ -88,7 +92,7 @@ spwStyle.innerHTML = `
 }
 #spw-x {
   position: absolute;
-  top: 50%; right: 12px;
+  top: 50%; right: 10px;
   transform: translateY(-50%);
   color: rgba(255,255,255,0.6);
   font-size: 12px;
@@ -121,11 +125,16 @@ spwStyle.innerHTML = `
   50%  { left: 120%; }
   100% { left: 120%; }
 }
-@media (max-width: 420px) {
-  #spw { bottom: 14px; right: 12px; }
-  #spw-box { min-width: 200px; padding: 10px 34px 10px 12px; }
+@media (min-width: 768px) {
+  #spw { bottom: 32px; right: 24px; }
+}
+@media (max-width: 767px) {
+  #spw { bottom: 68px; right: 12px; }
+  #spw-box { min-width: 0; max-width: calc(100vw - 24px); padding: 10px 32px 10px 12px; }
   .spw-msg-top { font-size: 12px; }
-  .spw-msg-top b { font-size: 14px; }
+  .spw-msg-top b { font-size: 13px; }
+  .spw-msg-sub { font-size: 10px; }
+  #spw-icon { font-size: 16px; }
 }
 `;
 document.head.appendChild(spwStyle);
