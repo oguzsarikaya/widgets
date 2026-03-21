@@ -155,7 +155,7 @@ spwStyle.innerHTML = `
 }
 @media (max-width: 767px) {
   #spw { bottom: 80px; right: 12px; }
-  #spw-box { width: 265px; }
+  #spw-box { width: 250px; }
 }
 `;
 document.head.appendChild(spwStyle);
