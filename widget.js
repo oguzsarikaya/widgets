@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const BASE_URL = "https://oguzsarikaya.github.io/widgets.js";
+  const BASE_URL = "https://oguzsarikaya.github.io/widgets";
   const WIDGETS = {
     "sal-ruyasi-urun-sosyal-kanit": BASE_URL + "/sal-ruyasi/urun-sayfasi/sosyal-kanit/index.js",
     "tablolife-urun-sosyal-kanit":  BASE_URL + "/tablolife/urun-sayfasi/sosyal-kanit/index.js",
