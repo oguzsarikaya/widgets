@@ -25,7 +25,7 @@ spwStyle.innerHTML = `
   border-radius: 50px;
   background: linear-gradient(135deg, #E91E8C, #FF5722);
   box-shadow: 0 6px 28px rgba(233,30,140,0.35), 0 2px 8px rgba(0,0,0,0.12);
-  width: 250px;
+  width: 265px;
   max-width: calc(100vw - 32px);
   box-sizing: border-box;
   overflow: hidden;
@@ -96,6 +96,11 @@ spwStyle.innerHTML = `
   font-size: 11px;
   font-weight: 600;
 }
+.spw-msg-top .spw-small b {
+  font-size: 11px;
+  font-weight: 800;
+  color: #ffffff;
+}
 .spw-msg-sub {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 10px;
@@ -141,15 +146,16 @@ spwStyle.innerHTML = `
 }
 @media (min-width: 768px) {
   #spw { bottom: 100px; right: 24px; }
-  #spw-box { width: 290px; }
+  #spw-box { width: 305px; }
   #spw-track { height: 52px; }
   .spw-msg-top { font-size: 14px; }
   .spw-msg-top b { font-size: 15px; }
   .spw-msg-top .spw-small { font-size: 12px; }
+  .spw-msg-top .spw-small b { font-size: 12px; }
 }
 @media (max-width: 767px) {
   #spw { bottom: 80px; right: 12px; }
-  #spw-box { width: 250px; }
+  #spw-box { width: 265px; }
 }
 `;
 document.head.appendChild(spwStyle);
@@ -182,7 +188,7 @@ document.body.appendChild(spwDiv);
     {
       icon: '✅',
       render: function(){ return {
-        top: '<span class="spw-small">Son 24 saatte</span> <b>' + data.sold + ' kişi</b> satın aldı',
+        top: '<span class="spw-small">Son 24 saatte <b>' + data.sold + ' kişi</b> satın aldı</span>',
         sub: 'Hızla tükeniyor!'
       };}
     }
