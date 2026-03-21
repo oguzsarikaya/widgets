@@ -2,140 +2,134 @@
 var spwStyle = document.createElement('style');
 spwStyle.innerHTML = `
 #spw {
-  position: fixed !important;
-  bottom: 80px !important;
-  right: 16px !important;
-  z-index: 99999 !important;
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  z-index: 99999;
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.36,1.3,.64,1);
 }
 #spw.spw-on {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+  opacity: 1;
+  transform: translateY(0);
 }
 #spw-box {
-  position: relative !important;
-  display: flex !important;
-  align-items: center !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  gap: 10px !important;
-  padding: 12px 38px 12px 14px !important;
-  border-radius: 50px !important;
-  background: linear-gradient(135deg, #E91E8C, #FF5722) !important;
-  box-shadow: 0 6px 28px rgba(233,30,140,0.35), 0 2px 8px rgba(0,0,0,0.12) !important;
-  width: 260px !important;
-  max-width: calc(100vw - 32px) !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
-  list-style: none !important;
-  margin: 0 !important;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 12px 38px 12px 14px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #E91E8C, #FF5722);
+  box-shadow: 0 6px 28px rgba(233,30,140,0.35), 0 2px 8px rgba(0,0,0,0.12);
+  width: 250px;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 #spw-box::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: -60% !important;
-  width: 40% !important;
-  height: 100% !important;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent) !important;
-  animation: spw-shine 3.5s ease-in-out infinite !important;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  animation: spw-shine 3.5s ease-in-out infinite;
 }
 #spw-icon {
-  font-size: 20px !important;
-  line-height: 1 !important;
-  flex-shrink: 0 !important;
-  display: block !important;
-  transition: transform 0.25s cubic-bezier(.36,1.56,.64,1) !important;
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+  display: block;
+  transition: transform 0.25s cubic-bezier(.36,1.56,.64,1);
 }
 #spw-track {
-  flex: 1 !important;
-  min-width: 0 !important;
-  position: relative !important;
-  height: 44px !important;
-  overflow: hidden !important;
-  display: block !important;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  height: 44px;
+  overflow: hidden;
+  display: block;
 }
 .spw-msg {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  height: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  opacity: 0 !important;
-  transform: translateY(14px) !important;
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(.36,1.3,.64,1) !important;
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(.36,1.3,.64,1);
 }
 .spw-msg.spw-active {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+  opacity: 1;
+  transform: translateY(0);
 }
 .spw-msg.spw-exit {
-  opacity: 0 !important;
-  transform: translateY(-14px) !important;
+  opacity: 0;
+  transform: translateY(-14px);
 }
 .spw-msg-top {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
-  color: #ffffff !important;
-  line-height: 1.3 !important;
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: unset !important;
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  list-style: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  white-space: normal;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 .spw-msg-top b {
-  font-size: 14px !important;
-  font-weight: 800 !important;
-  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+}
+.spw-msg-top .spw-small {
+  font-size: 11px;
+  font-weight: 600;
 }
 .spw-msg-sub {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-  font-size: 10px !important;
-  font-weight: 500 !important;
-  color: rgba(255,255,255,0.75) !important;
-  margin: 3px 0 0 0 !important;
-  padding: 0 !important;
-  display: block !important;
-  white-space: nowrap !important;
-  list-style: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  margin: 3px 0 0 0;
+  padding: 0;
+  display: block;
+  white-space: nowrap;
 }
 .spw-dot {
-  display: inline-block !important;
-  width: 6px !important;
-  height: 6px !important;
-  border-radius: 50% !important;
-  background: #fff !important;
-  margin-right: 5px !important;
-  vertical-align: middle !important;
-  animation: spw-pulse 1.5s ease-in-out infinite !important;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  margin-right: 5px;
+  vertical-align: middle;
+  animation: spw-pulse 1.5s ease-in-out infinite;
 }
 #spw-x {
-  position: absolute !important;
-  top: 50% !important;
-  right: 12px !important;
-  transform: translateY(-50%) !important;
-  color: rgba(255,255,255,0.65) !important;
-  font-size: 13px !important;
-  font-family: sans-serif !important;
-  cursor: pointer !important;
-  line-height: 1 !important;
-  transition: color 0.15s !important;
-  padding: 4px !important;
-  display: block !important;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.65);
+  font-size: 13px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.15s;
+  padding: 4px;
+  display: block;
 }
-#spw-x:hover { color: #fff !important; }
+#spw-x:hover { color: #fff; }
 @keyframes spw-pulse {
   0%,100% { opacity:1; transform:scale(1); }
   50%     { opacity:.4; transform:scale(1.6); }
@@ -146,21 +140,23 @@ spwStyle.innerHTML = `
   100% { left: 120%; }
 }
 @media (min-width: 768px) {
-  #spw { bottom: 40px !important; right: 24px !important; }
-  #spw-box { width: 280px !important; }
+  #spw { bottom: 100px; right: 24px; }
+  #spw-box { width: 290px; }
+  #spw-track { height: 52px; }
+  .spw-msg-top { font-size: 14px; }
+  .spw-msg-top b { font-size: 15px; }
+  .spw-msg-top .spw-small { font-size: 12px; }
 }
 @media (max-width: 767px) {
-  #spw { bottom: 80px !important; right: 12px !important; }
-  #spw-box { width: 240px !important; }
-  .spw-msg-top { font-size: 12px !important; }
-  .spw-msg-top b { font-size: 13px !important; }
+  #spw { bottom: 80px; right: 12px; }
+  #spw-box { width: 250px; }
 }
 `;
 document.head.appendChild(spwStyle);
 
 // HTML enjekte et
 var spwDiv = document.createElement('div');
-spwDiv.innerHTML = '<div id="spw"><div id="spw-box"><span id="spw-icon">&#128065;</span><div id="spw-track"></div><span id="spw-x">&#10005;</span></div></div>';
+spwDiv.innerHTML = '<div id="spw"><div id="spw-box"><span id="spw-icon">👁</span><div id="spw-track"></div><span id="spw-x">✕</span></div></div>';
 document.body.appendChild(spwDiv);
 
 // Widget JS
@@ -186,7 +182,7 @@ document.body.appendChild(spwDiv);
     {
       icon: '✅',
       render: function(){ return {
-        top: 'Son 24 saatte <b>' + data.sold + ' kişi</b> satın aldı',
+        top: '<span class="spw-small">Son 24 saatte</span> <b>' + data.sold + ' kişi</b> satın aldı',
         sub: 'Hızla tükeniyor!'
       };}
     }
@@ -196,7 +192,6 @@ document.body.appendChild(spwDiv);
   var track = document.getElementById('spw-track');
   var iconEl = document.getElementById('spw-icon');
 
-  // Mesaj div'lerini oluştur
   for (var i = 0; i < messages.length; i++) {
     var div = document.createElement('div');
     div.className = 'spw-msg' + (i === 0 ? ' spw-active' : '');
@@ -214,10 +209,10 @@ document.body.appendChild(spwDiv);
   function go(next) {
     var prev = current;
     current = next;
-    iconEl.style.cssText += '; transform: scale(0.7) rotate(-10deg) !important;';
+    iconEl.style.transform = 'scale(0.7) rotate(-10deg)';
     setTimeout(function(){
       iconEl.textContent = messages[current].icon;
-      iconEl.style.cssText += '; transform: scale(1) rotate(0deg) !important;';
+      iconEl.style.transform = 'scale(1) rotate(0deg)';
     }, 200);
     var prevEl = document.getElementById('spw-m-' + prev);
     var nextEl = document.getElementById('spw-m-' + current);
@@ -228,32 +223,26 @@ document.body.appendChild(spwDiv);
     nextEl.classList.add('spw-active');
   }
 
-  // İlk içerikleri doldur
   for (var j = 0; j < messages.length; j++) { updateContent(j); }
 
-  // Göster
   setTimeout(function(){
     document.getElementById('spw').classList.add('spw-on');
   }, 800);
 
-  // Döngü
   setInterval(function(){
     go((current + 1) % messages.length);
   }, 3000);
 
-  // Viewers güncelle
   setInterval(function(){
     data.viewers = Math.max(2, data.viewers + r(-4, 5));
     if (current === 0) updateContent(0);
   }, r(5000, 9000));
 
-  // Cart/sold artır
   setInterval(function(){
     if (r(0,1)) { data.cart += r(1,3); if (current === 1) updateContent(1); }
     else        { data.sold += 1;      if (current === 2) updateContent(2); }
   }, r(10000, 18000));
 
-  // Kapat
   document.getElementById('spw-x').addEventListener('click', function(){
     var w = document.getElementById('spw');
     w.style.opacity = '0';
