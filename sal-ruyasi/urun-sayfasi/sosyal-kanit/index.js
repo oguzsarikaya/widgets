@@ -25,7 +25,7 @@ spwStyle.innerHTML = `
   border-radius: 50px;
   background: linear-gradient(135deg, #E91E8C, #FF5722);
   box-shadow: 0 6px 28px rgba(233,30,140,0.35), 0 2px 8px rgba(0,0,0,0.12);
-  width: 250px;
+  width: 265px;
   max-width: calc(100vw - 32px);
   box-sizing: border-box;
   overflow: hidden;
@@ -150,12 +150,12 @@ spwStyle.innerHTML = `
   #spw-track { height: 52px; }
   .spw-msg-top { font-size: 14px; }
   .spw-msg-top b { font-size: 15px; }
-  .spw-msg-top .spw-small { font-size: 12px; }
-  .spw-msg-top .spw-small b { font-size: 12px; }
+  .spw-msg-top .spw-small { font-size: 14px; }
+  .spw-msg-top .spw-small b { font-size: 14px; }
 }
 @media (max-width: 767px) {
   #spw { bottom: 80px; right: 12px; }
-  #spw-box { width: 250px; }
+  #spw-box { width: 265px; }
 }
 `;
 document.head.appendChild(spwStyle);
