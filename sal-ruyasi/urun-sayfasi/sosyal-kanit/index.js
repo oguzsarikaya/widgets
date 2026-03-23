@@ -146,7 +146,7 @@ spwStyle.innerHTML = `
 }
 @media (min-width: 768px) {
   #spw { bottom: 100px; right: 24px; }
-  #spw-box { width: 305px; }
+  #spw-box { width: 300px; }
   #spw-track { height: 52px; }
   .spw-msg-top { font-size: 14px; }
   .spw-msg-top b { font-size: 15px; }
@@ -155,7 +155,7 @@ spwStyle.innerHTML = `
 }
 @media (max-width: 767px) {
   #spw { bottom: 80px; right: 12px; }
-  #spw-box { width: 265px; }
+  #spw-box { width: 255px; }
 }
 `;
 document.head.appendChild(spwStyle);
