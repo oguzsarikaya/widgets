@@ -156,7 +156,7 @@
 
 @media (max-width: 768px) {
   #salruyasi-wa-root {
-    bottom: 20px;
+    bottom: 50px;
     ${SIDE}: 20px;
   }
 
