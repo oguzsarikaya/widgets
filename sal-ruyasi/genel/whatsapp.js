@@ -5,7 +5,7 @@
     message:      'Merhaba, şal siparişi ve ürünler hakkında bilgi almak istiyorum.',
     agentName:    'Şal Rüyası',
     agentInitial: 'Ş',
-    bubbleText:   'Merhaba! 👋<br>Hılzı <strong>sipariş ve sorularınız</strong> için bize yazın, size yardımcı olalım!',
+    bubbleText:   'Merhaba! 👋<br>Hızlı <strong>sipariş ve sorularınız</strong> için bize yazın, size yardımcı olalım!',
     accentColor:  '#E75480',
     side:         'left',
     autoHideMs:   10000,   /* baloncu kaç ms sonra kapansın */
