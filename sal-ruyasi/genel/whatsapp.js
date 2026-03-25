@@ -8,7 +8,7 @@
     bubbleText:   'Merhaba! 👋<br>Hılzı <strong>sipariş ve sorularınız</strong> için bize yazın, size yardımcı olalım!',
     accentColor:  '#E75480',
     side:         'left',
-    autoHideMs:   5000,   /* baloncu kaç ms sonra kapansın */
+    autoHideMs:   10000,   /* baloncu kaç ms sonra kapansın */
     autoShowMs:   60000   /* kaç ms sonra tekrar açılsın  */
   };
   /* ────────────────────────────────────────────────────────────── */
