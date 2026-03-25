@@ -1,4 +1,5 @@
 (function () {
+
   var fem = [
     "Ayşe","Fatma","Zeynep","Elif","Emine","Merve","Büşra","Selin","Esra",
     "Neslihan","Gamze","Özlem","Dilek","Derya","Tuğba","Şeyma","Pınar","Cemre",
@@ -28,70 +29,92 @@
   function p(a) { return a[Math.floor(Math.random() * a.length)]; }
   function r(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
 
-  /* ── STYLE ── */
+  /* ── CSS ── */
   var css = ""
-    /* Masaüstü: ürün sayfasıyla aynı konum */
     + "#_spw{"
     +   "position:fixed;"
-    +   "bottom:100px;"
-    +   "right:24px;"
+    +   "right:18px;bottom:100px;"
+    +   "width:min(92vw,300px);"
     +   "z-index:2147483647;"
-    +   "font-family:Arial,sans-serif;"
     + "}"
     + "#_spt{"
-    +   "width:300px;"
-    +   "border-radius:14px;"
+    +   "position:relative;"
+    +   "display:flex;"
+    +   "align-items:center;"
+    +   "gap:10px;"
+    +   "padding:11px 38px 11px 12px;"
+    +   "border-radius:50px;"
+    +   "background:linear-gradient(135deg,#E91E8C,#FF5722);"
+    +   "box-shadow:0 6px 28px rgba(233,30,140,0.35),0 2px 8px rgba(0,0,0,0.12);"
     +   "overflow:hidden;"
-    +   "box-shadow:0 4px 24px rgba(190,24,93,0.22);"
     + "}"
-    + ".sp-c{"
-    +   "background:linear-gradient(135deg,#ec4899,#be185d);"
-    +   "padding:14px 46px 14px 14px;"
-    +   "display:flex;align-items:center;gap:12px;"
-    +   "position:relative;min-height:76px;"
+    /* parlama */
+    + "#_spt::before{"
+    +   "content:'';"
+    +   "position:absolute;"
+    +   "top:0;left:-60%;"
+    +   "width:40%;height:100%;"
+    +   "background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);"
+    +   "animation:spshine 3.5s ease-in-out infinite;"
     + "}"
-    + ".sp-i{"
-    +   "width:44px;height:44px;border-radius:11px;"
-    +   "background:rgba(255,255,255,.2);"
-    +   "display:flex;align-items:center;justify-content:center;"
-    +   "font-size:23px;flex-shrink:0;"
+    + "@keyframes spshine{0%{left:-60%}50%{left:120%}100%{left:120%}}"
+    /* ikon kutusu */
+    + "#_spico{"
+    +   "font-size:20px;line-height:1;flex-shrink:0;"
     + "}"
-    + ".sp-b{flex:1;min-width:0;height:54px;overflow:hidden}"
-    + ".sp-s{display:flex;flex-direction:column;will-change:transform}"
-    + ".sp-r{height:54px;display:flex;flex-direction:column;justify-content:center;flex-shrink:0}"
+    /* slot alanı */
+    + "#_sptrack{"
+    +   "flex:1;min-width:0;"
+    +   "height:44px;overflow:hidden;"
+    +   "position:relative;"
+    + "}"
+    + ".sp-r{"
+    +   "position:absolute;top:0;left:0;right:0;height:100%;"
+    +   "display:flex;flex-direction:column;justify-content:center;"
+    +   "opacity:0;transform:translateY(14px);"
+    +   "transition:opacity .35s ease,transform .35s cubic-bezier(.36,1.3,.64,1);"
+    + "}"
+    + ".sp-r.sp-in{opacity:1;transform:translateY(0)}"
+    + ".sp-r.sp-out{opacity:0;transform:translateY(-14px)}"
     + ".sp-nm{"
+    +   "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"
     +   "font-size:13px;font-weight:700;color:#fff;"
     +   "line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"
     + "}"
     + ".sp-cy{"
-    +   "font-size:12px;color:rgba(255,255,255,.9);margin-top:2px;"
-    +   "white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"
-    + "}"
-    + ".sp-sb{"
-    +   "font-size:11px;color:rgba(255,255,255,.72);margin-top:3px;"
+    +   "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"
+    +   "font-size:11px;font-weight:500;color:rgba(255,255,255,0.82);"
+    +   "margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"
     +   "display:flex;align-items:center;gap:5px;"
     + "}"
-    + ".sp-dt{"
-    +   "width:6px;height:6px;border-radius:50%;background:#fde68a;"
-    +   "animation:spdp 2s infinite;"
+    + ".sp-dot{"
+    +   "display:inline-block;width:6px;height:6px;border-radius:50%;"
+    +   "background:#fff;flex-shrink:0;"
+    +   "animation:sppulse 1.5s ease-in-out infinite;"
     + "}"
-    + "@keyframes spdp{0%,100%{opacity:1}50%{opacity:.3}}"
-    + ".sp-x{"
-    +   "position:absolute;top:10px;right:10px;"
-    +   "width:22px;height:22px;border-radius:50%;"
-    +   "background:rgba(0,0,0,.2);border:none;cursor:pointer;"
-    +   "display:flex;align-items:center;justify-content:center;"
-    +   "padding:0;color:#fff;font-size:14px;line-height:1;"
+    + "@keyframes sppulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}"
+    /* kapat */
+    + "#_spx{"
+    +   "position:absolute;top:50%;right:12px;"
+    +   "transform:translateY(-50%);"
+    +   "color:rgba(255,255,255,0.65);font-size:13px;"
+    +   "cursor:pointer;line-height:1;padding:4px;"
+    +   "background:none;border:none;"
     + "}"
-    + ".sp-x:hover{background:rgba(0,0,0,.35)}"
-    /* Mobil: ürün sayfasıyla aynı konum, kutu biraz daha dar */
+    + "#_spx:hover{color:#fff}"
+    /* masaüstü */
+    + "@media(min-width:768px){"
+    +   "#_spw{bottom:100px;right:24px;width:min(92vw,310px)}"
+    +   "#_sptrack{height:52px}"
+    +   ".sp-nm{font-size:14px}"
+    +   ".sp-cy{font-size:12px}"
+    + "}"
+    /* mobil */
     + "@media(max-width:767px){"
-    +   "#_spw{bottom:80px;right:12px;}"
-    +   "#_spt{width:255px;}"
-    +   ".sp-i{width:36px;height:36px;font-size:19px;}"
-    +   ".sp-nm{font-size:12px;}"
-    +   ".sp-cy{font-size:11px;}"
-    +   ".sp-sb{font-size:10px;}"
+    +   "#_spw{bottom:62px;right:12px;width:min(92vw,265px)}"
+    +   "#_sptrack{height:40px}"
+    +   ".sp-nm{font-size:12px}"
+    +   ".sp-cy{font-size:10px}"
     + "}";
 
   var st = document.createElement("style");
@@ -103,55 +126,57 @@
   wrap.id = "_spw";
   wrap.innerHTML = ""
     + "<div id='_spt'>"
-    +   "<div class='sp-c'>"
-    +     "<div class='sp-i'>\uD83E\uDDE3</div>"
-    +     "<div class='sp-b'><div class='sp-s' id='sp-s'></div></div>"
-    +     "<button class='sp-x' onclick=\"document.getElementById('_spw').style.display='none'\">\u00D7</button>"
-    +   "</div>"
+    +   "<span id='_spico'>\uD83E\uDDE3</span>"
+    +   "<div id='_sptrack'></div>"
+    +   "<button id='_spx' onclick=\"document.getElementById('_spw').style.display='none'\">✕</button>"
     + "</div>";
   document.body.appendChild(wrap);
 
   /* ── SLOT ── */
+  var track = document.getElementById("_sptrack");
+  var current = null;
   var busy = false;
 
   function mkRow(name, city, ek, qty, time) {
     var d = document.createElement("div");
     d.className = "sp-r";
-    d.innerHTML = "<div class='sp-nm'>" + name + "</div>"
-      + "<div class='sp-cy'>" + city + ek + " \u2022 " + qty + " \u00FCr\u00FCn sipari\u015F verdi</div>"
-      + "<div class='sp-sb'><div class='sp-dt'></div><span>" + time + "</span></div>";
+    d.innerHTML = "<div class='sp-nm'>" + name + " " + city + ek + " " + qty + " ürün sipariş verdi</div>"
+      + "<div class='sp-cy'><span class='sp-dot'></span>" + time + "</div>";
     return d;
   }
 
-  function spin() {
+  function show() {
     if (busy) return;
     busy = true;
+
     var c = p(cits), qty = r(1, 5), time = p(tms);
-    var sl = document.getElementById("sp-s");
-    var row = mkRow(p(fem) + " " + p(ini) + ".", c[0], c[1], qty, time);
+    var name = p(fem) + " " + p(ini) + ".";
+    var next = mkRow(name, c[0], c[1], qty, time);
+    track.appendChild(next);
 
-    if (sl.children.length === 0) {
-      sl.appendChild(row);
-      busy = false;
-      return;
-    }
+    /* yeni satırı görünür yap */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        next.classList.add("sp-in");
 
-    sl.appendChild(row);
-    sl.style.transition = "none";
-    sl.style.transform = "translateY(0)";
+        /* eskiyi çıkar */
+        if (current) {
+          var old = current;
+          old.classList.remove("sp-in");
+          old.classList.add("sp-out");
+          setTimeout(function () {
+            if (old.parentNode) old.parentNode.removeChild(old);
+          }, 400);
+        }
 
-    setTimeout(function () {
-      sl.style.transition = "transform 500ms cubic-bezier(.22,1,.36,1)";
-      sl.style.transform = "translateY(-54px)";
-      setTimeout(function () {
-        while (sl.children.length > 1) sl.removeChild(sl.firstChild);
-        sl.style.transition = "none";
-        sl.style.transform = "translateY(0)";
+        current = next;
         busy = false;
-      }, 540);
-    }, 20);
+      });
+    });
   }
 
-  spin();
-  setInterval(spin, 5000);
+  /* ilk gösterim */
+  show();
+  setInterval(show, 5000);
+
 })();
