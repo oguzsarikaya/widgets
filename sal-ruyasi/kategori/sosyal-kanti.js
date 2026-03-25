@@ -26,110 +26,95 @@
     ["Diyarbakır","'dan"],["Şanlıurfa","'dan"],["Van","'dan"],["Mardin","'den"]
   ];
 
+  /* şal → paket → kargo sırasıyla dönen ikonlar */
+  var icons = ["\uD83E\uDDE3", "\uD83D\uDCE6", "\uD83D\uDE9A"];
+  var iconIdx = 0;
+
   function p(a) { return a[Math.floor(Math.random() * a.length)]; }
   function r(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
 
-  /* ── CSS — ürün sayfasındaki spw-box ile birebir aynı ── */
+  /* ── CSS ── */
   var css = [
+    /* sarmalayıcı — masaüstü */
     "#_spw{",
       "position:fixed;",
-      "right:18px;bottom:100px;",
-      "width:min(92vw,320px);",
-      "z-index:2147483647;pointer-events:none;",
+      "bottom:100px;right:24px;",
+      "width:300px;",
+      "z-index:2147483647;",
+      "font-family:Arial,sans-serif;",
     "}",
 
+    /* kart */
     "#_spt{",
-      "pointer-events:auto;",
-      "display:grid;",
-      "grid-template-columns:40px 1fr;",
-      "gap:10px;align-items:center;",
-      "padding:10px 38px 10px 12px;",
-      "border-radius:50px;",                          /* ← pill */
-      "background:linear-gradient(135deg,#E91E8C,#FF5722);",
-      "box-shadow:0 6px 28px rgba(233,30,140,.35),0 2px 8px rgba(0,0,0,.12);",
-      "position:relative;overflow:hidden;",
-      "box-sizing:border-box;",
+      "width:100%;",
+      "border-radius:14px;",
+      "overflow:hidden;",
+      "box-shadow:0 4px 24px rgba(190,24,93,0.25);",
     "}",
 
-    /* parlama — ürün sayfasıyla aynı */
-    "#_spt::before{",
-      "content:'';position:absolute;top:0;left:-60%;",
-      "width:40%;height:100%;",
-      "background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);",
-      "animation:spshine 3.5s ease-in-out infinite;",
+    /* içerik */
+    ".sp-c{",
+      "background:linear-gradient(135deg,#ec4899,#be185d);",
+      "padding:14px 46px 14px 14px;",
+      "display:flex;align-items:center;gap:12px;",
+      "position:relative;min-height:76px;",
     "}",
-    "@keyframes spshine{0%{left:-60%}50%{left:120%}100%{left:120%}}",
 
-    /* ikon */
-    "#_spico{",
-      "width:40px;height:40px;border-radius:999px;",
-      "background:radial-gradient(circle at 70% 30%,#fff 0 28%,transparent 30%),",
-                 "radial-gradient(circle at 30% 70%,#fff 0 18%,transparent 18%),",
-                 "#E91E8C;",
-      "border:2px solid #fff;",
-      "box-shadow:0 6px 18px rgba(233,30,140,.25),inset 0 0 0 1px rgba(255,255,255,.6);",
+    /* ikon kutusu */
+    ".sp-i{",
+      "width:44px;height:44px;border-radius:11px;",
+      "background:rgba(255,255,255,.22);",
       "display:flex;align-items:center;justify-content:center;",
-      "font-size:18px;flex-shrink:0;",
+      "font-size:22px;flex-shrink:0;",
+      "transition:transform .25s cubic-bezier(.36,1.56,.64,1);",
     "}",
+    ".sp-i.sp-bounce{transform:scale(1.35) rotate(-8deg)}",
 
-    /* metin alanı */
-    "#_sptrack{",
-      "flex:1;min-width:0;",
-      "height:44px;overflow:hidden;position:relative;",
-    "}",
-
-    ".sp-r{",
-      "position:absolute;top:0;left:0;right:0;height:100%;",
-      "display:flex;flex-direction:column;justify-content:center;",
-      "opacity:0;transform:translateY(14px);",
-      "transition:opacity .35s ease,transform .35s cubic-bezier(.36,1.3,.64,1);",
-    "}",
-    ".sp-r.sp-in{opacity:1;transform:translateY(0)}",
-    ".sp-r.sp-out{opacity:0;transform:translateY(-14px)}",
+    /* slot */
+    ".sp-b{flex:1;min-width:0;height:54px;overflow:hidden}",
+    ".sp-s{display:flex;flex-direction:column;will-change:transform}",
+    ".sp-r{height:54px;display:flex;flex-direction:column;justify-content:center;flex-shrink:0}",
 
     ".sp-nm{",
-      "font:700 14px/1.35 system-ui,-apple-system,'Segoe UI',sans-serif;",
-      "color:#fff;letter-spacing:.2px;",
-      "white-space:nowrap;overflow:hidden;text-overflow:ellipsis;",
+      "font-size:13px;font-weight:700;color:#fff;",
+      "line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;",
     "}",
     ".sp-cy{",
-      "margin-top:3px;",
-      "font:500 12px/1.3 system-ui,-apple-system,'Segoe UI',sans-serif;",
-      "color:rgba(255,255,255,.9);",
+      "font-size:12px;color:rgba(255,255,255,.9);margin-top:2px;",
       "white-space:nowrap;overflow:hidden;text-overflow:ellipsis;",
+    "}",
+    ".sp-sb{",
+      "font-size:11px;color:rgba(255,255,255,.72);margin-top:3px;",
       "display:flex;align-items:center;gap:5px;",
     "}",
     ".sp-dot{",
-      "display:inline-block;width:6px;height:6px;border-radius:50%;",
-      "background:#fff;flex-shrink:0;",
-      "animation:spdot 1.5s ease-in-out infinite;",
+      "width:6px;height:6px;border-radius:50%;",
+      "background:#fde68a;flex-shrink:0;",
+      "animation:spdp 2s infinite;",
     "}",
-    "@keyframes spdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}",
+    "@keyframes spdp{0%,100%{opacity:1}50%{opacity:.3}}",
 
     /* kapat */
-    "#_spx{",
-      "position:absolute;top:50%;right:12px;transform:translateY(-50%);",
-      "color:rgba(255,255,255,.65);font-size:13px;cursor:pointer;",
-      "line-height:1;padding:4px;background:none;border:none;",
+    ".sp-x{",
+      "position:absolute;top:10px;right:10px;",
+      "width:22px;height:22px;border-radius:50%;",
+      "background:rgba(0,0,0,.2);border:none;cursor:pointer;",
+      "display:flex;align-items:center;justify-content:center;",
+      "padding:0;color:#fff;font-size:14px;line-height:1;",
     "}",
-    "#_spx:hover{color:#fff}",
+    ".sp-x:hover{background:rgba(0,0,0,.35)}",
 
-    /* masaüstü */
-    "@media(min-width:768px){",
-      "#_spw{bottom:100px;right:24px;}",
-      "#_sptrack{height:52px}",
-      ".sp-nm{font-size:14px}",
-      ".sp-cy{font-size:12px}",
-    "}",
-
-    /* mobil */
+    /* mobil — ürün sayfasıyla aynı */
     "@media(max-width:767px){",
       "#_spw{bottom:62px;right:12px;width:min(92vw,265px);}",
-      "#_spt{grid-template-columns:32px 1fr;gap:8px;padding:8px 32px 8px 10px;}",
-      "#_spico{width:32px;height:32px;font-size:15px;}",
-      "#_sptrack{height:38px}",
+      ".sp-c{padding:9px 36px 9px 10px;gap:9px;min-height:0}",
+      ".sp-i{width:34px;height:34px;border-radius:8px;font-size:17px}",
+      ".sp-b{height:42px}",
+      ".sp-r{height:42px}",
       ".sp-nm{font-size:12px}",
-      ".sp-cy{font-size:10px;margin-top:2px}",
+      ".sp-cy{font-size:11px}",
+      ".sp-sb{font-size:10px}",
+      ".sp-x{width:19px;height:19px;font-size:12px;top:8px;right:8px}",
     "}"
   ].join("");
 
@@ -142,42 +127,73 @@
   wrap.id = "_spw";
   wrap.innerHTML = ""
     + "<div id='_spt'>"
-    +   "<div id='_spico'>\uD83E\uDDE3</div>"
-    +   "<div id='_sptrack'></div>"
-    +   "<button id='_spx' onclick=\"document.getElementById('_spw').style.display='none'\">✕</button>"
+    +   "<div class='sp-c'>"
+    +     "<div class='sp-i' id='_spico'>\uD83E\uDDE3</div>"
+    +     "<div class='sp-b'><div class='sp-s' id='sp-s'></div></div>"
+    +     "<button class='sp-x' onclick=\"document.getElementById('_spw').style.display='none'\">\u00D7</button>"
+    +   "</div>"
     + "</div>";
   document.body.appendChild(wrap);
 
   /* ── SLOT ── */
-  var track = document.getElementById("_sptrack");
-  var current = null;
+  var busy = false;
+  var icoEl = document.getElementById("_spico");
 
-  function show() {
-    var c = p(cits), qty = r(1, 5), time = p(tms);
-    var name = p(fem) + " " + p(ini) + ".";
-
-    var next = document.createElement("div");
-    next.className = "sp-r";
-    next.innerHTML = ""
-      + "<div class='sp-nm'>" + name + " " + c[0] + c[1] + " " + qty + " ürün sipariş verdi</div>"
-      + "<div class='sp-cy'><span class='sp-dot'></span>" + time + "</div>";
-    track.appendChild(next);
-
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        next.classList.add("sp-in");
-        if (current) {
-          var old = current;
-          old.classList.remove("sp-in");
-          old.classList.add("sp-out");
-          setTimeout(function () { if (old.parentNode) old.parentNode.removeChild(old); }, 400);
-        }
-        current = next;
-      });
-    });
+  function mkRow(name, city, ek, qty, time) {
+    var d = document.createElement("div");
+    d.className = "sp-r";
+    d.innerHTML = "<div class='sp-nm'>" + name + "</div>"
+      + "<div class='sp-cy'>" + city + ek + " \u2022 " + qty + " \u00FCr\u00FCn sipari\u015F verdi</div>"
+      + "<div class='sp-sb'><div class='sp-dot'></div><span>" + time + "</span></div>";
+    return d;
   }
 
-  show();
-  setInterval(show, 5000);
+  function animateIcon() {
+    iconIdx = (iconIdx + 1) % icons.length;
+    icoEl.classList.add("sp-bounce");
+    setTimeout(function () {
+      icoEl.textContent = icons[iconIdx];
+      icoEl.classList.remove("sp-bounce");
+    }, 180);
+  }
+
+  function spin() {
+    if (busy) return;
+    busy = true;
+
+    var c = p(cits), qty = r(1, 5), time = p(tms);
+    var name = p(fem) + " " + p(ini) + ".";
+    var sl = document.getElementById("sp-s");
+    var newRow = mkRow(name, c[0], c[1], qty, time);
+
+    animateIcon();
+
+    if (sl.children.length === 0) {
+      sl.appendChild(newRow);
+      sl.style.transform = "translateY(0)";
+      busy = false;
+      return;
+    }
+
+    sl.appendChild(newRow);
+    sl.style.transition = "none";
+    sl.style.transform = "translateY(0)";
+
+    var h = window.innerWidth < 768 ? 42 : 54;
+
+    setTimeout(function () {
+      sl.style.transition = "transform 500ms cubic-bezier(.22,1,.36,1)";
+      sl.style.transform = "translateY(-" + h + "px)";
+      setTimeout(function () {
+        while (sl.children.length > 1) sl.removeChild(sl.firstChild);
+        sl.style.transition = "none";
+        sl.style.transform = "translateY(0)";
+        busy = false;
+      }, 540);
+    }, 20);
+  }
+
+  spin();
+  setInterval(spin, 5000);
 
 })();
