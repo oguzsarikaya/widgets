@@ -26,33 +26,24 @@
     ["Diyarbakır","'dan"],["Şanlıurfa","'dan"],["Van","'dan"],["Mardin","'den"]
   ];
 
-  /* şal → paket → kargo sırasıyla dönen ikonlar */
-  var icons = ["\uD83E\uDDE3", "\uD83D\uDCE6", "\uD83D\uDE9A"];
+  var icons = ["\uD83E\uDDE3","\uD83D\uDCE6","\uD83D\uDE9A"];
   var iconIdx = 0;
 
   function p(a) { return a[Math.floor(Math.random() * a.length)]; }
   function r(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
 
-  /* ── CSS ── */
   var css = [
-    /* sarmalayıcı — masaüstü */
     "#_spw{",
       "position:fixed;",
-      "bottom:100px;right:24px;",
+      "bottom:50px;right:24px;",   /* masaüstü */
       "width:300px;",
       "z-index:2147483647;",
       "font-family:Arial,sans-serif;",
     "}",
-
-    /* kart */
     "#_spt{",
-      "width:100%;",
-      "border-radius:14px;",
-      "overflow:hidden;",
+      "width:100%;border-radius:14px;overflow:hidden;",
       "box-shadow:0 4px 24px rgba(190,24,93,0.25);",
     "}",
-
-    /* içerik */
     ".sp-c{",
       "background:linear-gradient(135deg,#ec4899,#be185d);",
       "padding:14px 46px 14px 14px;",
@@ -60,38 +51,25 @@
       "position:relative;min-height:76px;",
     "}",
 
-    /* ikon kutusu */
+    /* ikon — flip animasyonu */
     ".sp-i{",
       "width:44px;height:44px;border-radius:11px;",
       "background:rgba(255,255,255,.22);",
       "display:flex;align-items:center;justify-content:center;",
       "font-size:22px;flex-shrink:0;",
-      "transition:transform .25s cubic-bezier(.36,1.56,.64,1);",
+      "transition:transform .3s ease;",
+      "transform-style:preserve-3d;",
     "}",
-    ".sp-i.sp-bounce{transform:scale(1.35) rotate(-8deg)}",
+    ".sp-i.flip{transform:rotateY(90deg)}",
 
     /* slot */
     ".sp-b{flex:1;min-width:0;height:54px;overflow:hidden}",
     ".sp-s{display:flex;flex-direction:column;will-change:transform}",
     ".sp-r{height:54px;display:flex;flex-direction:column;justify-content:center;flex-shrink:0}",
-
-    ".sp-nm{",
-      "font-size:13px;font-weight:700;color:#fff;",
-      "line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;",
-    "}",
-    ".sp-cy{",
-      "font-size:12px;color:rgba(255,255,255,.9);margin-top:2px;",
-      "white-space:nowrap;overflow:hidden;text-overflow:ellipsis;",
-    "}",
-    ".sp-sb{",
-      "font-size:11px;color:rgba(255,255,255,.72);margin-top:3px;",
-      "display:flex;align-items:center;gap:5px;",
-    "}",
-    ".sp-dot{",
-      "width:6px;height:6px;border-radius:50%;",
-      "background:#fde68a;flex-shrink:0;",
-      "animation:spdp 2s infinite;",
-    "}",
+    ".sp-nm{font-size:13px;font-weight:700;color:#fff;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+    ".sp-cy{font-size:12px;color:rgba(255,255,255,.9);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+    ".sp-sb{font-size:11px;color:rgba(255,255,255,.72);margin-top:3px;display:flex;align-items:center;gap:5px}",
+    ".sp-dot{width:6px;height:6px;border-radius:50%;background:#fde68a;flex-shrink:0;animation:spdp 2s infinite}",
     "@keyframes spdp{0%,100%{opacity:1}50%{opacity:.3}}",
 
     /* kapat */
@@ -104,17 +82,18 @@
     "}",
     ".sp-x:hover{background:rgba(0,0,0,.35)}",
 
-    /* mobil — ürün sayfasıyla aynı */
+    /* mobil */
     "@media(max-width:767px){",
-      "#_spw{bottom:62px;right:12px;width:min(92vw,265px);}",
-      ".sp-c{padding:9px 36px 9px 10px;gap:9px;min-height:0}",
-      ".sp-i{width:34px;height:34px;border-radius:8px;font-size:17px}",
-      ".sp-b{height:42px}",
-      ".sp-r{height:42px}",
-      ".sp-nm{font-size:12px}",
-      ".sp-cy{font-size:11px}",
-      ".sp-sb{font-size:10px}",
-      ".sp-x{width:19px;height:19px;font-size:12px;top:8px;right:8px}",
+      "#_spw{bottom:60px;right:10px;width:240px;}",
+      ".sp-c{padding:9px 34px 9px 10px;gap:8px;min-height:0}",
+      ".sp-i{width:32px;height:32px;border-radius:8px;font-size:16px}",
+      ".sp-b{height:40px}",
+      ".sp-r{height:40px}",
+      ".sp-nm{font-size:11px}",
+      ".sp-cy{font-size:10px;margin-top:1px}",
+      ".sp-sb{font-size:9px;margin-top:2px}",
+      ".sp-dot{width:5px;height:5px}",
+      ".sp-x{width:18px;height:18px;font-size:11px;top:7px;right:7px}",
     "}"
   ].join("");
 
@@ -122,7 +101,6 @@
   st.textContent = css;
   document.head.appendChild(st);
 
-  /* ── HTML ── */
   var wrap = document.createElement("div");
   wrap.id = "_spw";
   wrap.innerHTML = ""
@@ -135,9 +113,17 @@
     + "</div>";
   document.body.appendChild(wrap);
 
-  /* ── SLOT ── */
   var busy = false;
   var icoEl = document.getElementById("_spico");
+
+  function flipIcon() {
+    icoEl.classList.add("flip");
+    setTimeout(function () {
+      iconIdx = (iconIdx + 1) % icons.length;
+      icoEl.textContent = icons[iconIdx];
+      icoEl.classList.remove("flip");
+    }, 300);
+  }
 
   function mkRow(name, city, ek, qty, time) {
     var d = document.createElement("div");
@@ -148,15 +134,6 @@
     return d;
   }
 
-  function animateIcon() {
-    iconIdx = (iconIdx + 1) % icons.length;
-    icoEl.classList.add("sp-bounce");
-    setTimeout(function () {
-      icoEl.textContent = icons[iconIdx];
-      icoEl.classList.remove("sp-bounce");
-    }, 180);
-  }
-
   function spin() {
     if (busy) return;
     busy = true;
@@ -165,8 +142,9 @@
     var name = p(fem) + " " + p(ini) + ".";
     var sl = document.getElementById("sp-s");
     var newRow = mkRow(name, c[0], c[1], qty, time);
+    var h = window.innerWidth < 768 ? 40 : 54;
 
-    animateIcon();
+    flipIcon();
 
     if (sl.children.length === 0) {
       sl.appendChild(newRow);
@@ -178,8 +156,6 @@
     sl.appendChild(newRow);
     sl.style.transition = "none";
     sl.style.transform = "translateY(0)";
-
-    var h = window.innerWidth < 768 ? 42 : 54;
 
     setTimeout(function () {
       sl.style.transition = "transform 500ms cubic-bezier(.22,1,.36,1)";
