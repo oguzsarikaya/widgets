@@ -33,13 +33,24 @@
   function r(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
 
   var css = [
+    /* sarmalayıcı — başlangıçta sağ dışında, gizli */
     "#_spw{",
       "position:fixed;",
-      "bottom:50px;right:24px;",   /* masaüstü */
+      "bottom:50px;right:24px;",
       "width:300px;",
       "z-index:2147483647;",
       "font-family:Arial,sans-serif;",
+      "transform:translateX(340px);",
+      "opacity:0;",
+      "transition:transform 0.5s cubic-bezier(.22,1,.36,1), opacity 0.5s ease;",
+      "pointer-events:none;",
     "}",
+    "#_spw.sp-visible{",
+      "transform:translateX(0);",
+      "opacity:1;",
+      "pointer-events:auto;",
+    "}",
+
     "#_spt{",
       "width:100%;border-radius:14px;overflow:hidden;",
       "box-shadow:0 4px 24px rgba(190,24,93,0.25);",
@@ -51,18 +62,15 @@
       "position:relative;min-height:76px;",
     "}",
 
-    /* ikon — flip animasyonu */
     ".sp-i{",
       "width:44px;height:44px;border-radius:11px;",
       "background:rgba(255,255,255,.22);",
       "display:flex;align-items:center;justify-content:center;",
       "font-size:22px;flex-shrink:0;",
       "transition:transform .3s ease;",
-      "transform-style:preserve-3d;",
     "}",
     ".sp-i.flip{transform:rotateY(90deg)}",
 
-    /* slot */
     ".sp-b{flex:1;min-width:0;height:54px;overflow:hidden}",
     ".sp-s{display:flex;flex-direction:column;will-change:transform}",
     ".sp-r{height:54px;display:flex;flex-direction:column;justify-content:center;flex-shrink:0}",
@@ -72,7 +80,6 @@
     ".sp-dot{width:6px;height:6px;border-radius:50%;background:#fde68a;flex-shrink:0;animation:spdp 2s infinite}",
     "@keyframes spdp{0%,100%{opacity:1}50%{opacity:.3}}",
 
-    /* kapat */
     ".sp-x{",
       "position:absolute;top:10px;right:10px;",
       "width:22px;height:22px;border-radius:50%;",
@@ -82,9 +89,9 @@
     "}",
     ".sp-x:hover{background:rgba(0,0,0,.35)}",
 
-    /* mobil */
     "@media(max-width:767px){",
       "#_spw{bottom:60px;right:10px;width:240px;}",
+      "#_spw{transform:translateX(270px);}",
       ".sp-c{padding:9px 34px 9px 10px;gap:8px;min-height:0}",
       ".sp-i{width:32px;height:32px;border-radius:8px;font-size:16px}",
       ".sp-b{height:40px}",
@@ -108,14 +115,31 @@
     +   "<div class='sp-c'>"
     +     "<div class='sp-i' id='_spico'>\uD83E\uDDE3</div>"
     +     "<div class='sp-b'><div class='sp-s' id='sp-s'></div></div>"
-    +     "<button class='sp-x' onclick=\"document.getElementById('_spw').style.display='none'\">\u00D7</button>"
+    +     "<button class='sp-x' id='_spx'>\u00D7</button>"
     +   "</div>"
     + "</div>";
   document.body.appendChild(wrap);
 
   var busy = false;
-  var icoEl = document.getElementById("_spico");
+  var icoEl  = document.getElementById("_spico");
+  var sl     = document.getElementById("sp-s");
+  var closed = false; /* kullanıcı × tıkladıysa döngüyü durdur */
 
+  /* × butonu */
+  document.getElementById("_spx").addEventListener("click", function () {
+    closed = true;
+    slideOut();
+  });
+
+  /* ── sağdan giriş / çıkış ── */
+  function slideIn() {
+    wrap.classList.add("sp-visible");
+  }
+  function slideOut() {
+    wrap.classList.remove("sp-visible");
+  }
+
+  /* ── ikon flip ── */
   function flipIcon() {
     icoEl.classList.add("flip");
     setTimeout(function () {
@@ -125,6 +149,7 @@
     }, 300);
   }
 
+  /* ── satır oluştur ── */
   function mkRow(name, city, ek, qty, time) {
     var d = document.createElement("div");
     d.className = "sp-r";
@@ -134,13 +159,12 @@
     return d;
   }
 
-  function spin() {
+  /* ── slot kaydır ── */
+  function spinContent() {
     if (busy) return;
     busy = true;
-
     var c = p(cits), qty = r(1, 5), time = p(tms);
     var name = p(fem) + " " + p(ini) + ".";
-    var sl = document.getElementById("sp-s");
     var newRow = mkRow(name, c[0], c[1], qty, time);
     var h = window.innerWidth < 768 ? 40 : 54;
 
@@ -169,7 +193,50 @@
     }, 20);
   }
 
-  spin();
-  setInterval(spin, 5000);
+  /* ── ana döngü ──
+     5sn sonra gir → içerik yükle → 5sn ekranda dur → çık → 30sn bekle → tekrar
+  */
+  var SHOW_DELAY  = 5000;   /* sayfa açıldıktan sonra ilk giriş */
+  var VISIBLE_DUR = 5000;   /* ekranda kalma süresi */
+  var HIDE_DUR    = 30000;  /* gizli kalma süresi */
+  var SLOT_INT    = 5000;   /* içerik değiştirme aralığı */
+
+  var slotTimer = null;
+
+  function startSlot() {
+    spinContent();
+    slotTimer = setInterval(function () {
+      if (!closed) spinContent();
+    }, SLOT_INT);
+  }
+
+  function stopSlot() {
+    clearInterval(slotTimer);
+    slotTimer = null;
+  }
+
+  function cycle() {
+    if (closed) return;
+
+    /* içeriği hazırla, sonra gir */
+    spinContent();
+    slideIn();
+    startSlot();
+
+    setTimeout(function () {
+      if (closed) return;
+      slideOut();
+      stopSlot();
+
+      setTimeout(function () {
+        if (closed) return;
+        cycle();
+      }, HIDE_DUR);
+
+    }, VISIBLE_DUR);
+  }
+
+  /* ilk giriş 5sn sonra */
+  setTimeout(cycle, SHOW_DELAY);
 
 })();
