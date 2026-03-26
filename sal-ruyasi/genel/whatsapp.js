@@ -5,41 +5,41 @@
     message:      'Merhaba, şal siparişi ve ürünler hakkında bilgi almak istiyorum.',
     agentName:    'Şal Rüyası',
     agentInitial: 'Ş',
-    bubbleText:   'Merhaba! 👋<br>Hızlı <strong>sipariş ve sorularınız</strong> için bize yazın, size yardımcı olalım!',
+    bubbleText:   'Merhaba! 👋<br>Hızlı <strong>sipariş ve sorularınız</strong> için bize yazın!',
     accentColor:  '#E75480',
     side:         'left',
-    autoHideMs:   10000,   /* baloncu kaç ms sonra kapansın */
-    autoShowMs:   60000   /* kaç ms sonra tekrar açılsın  */
+    autoHideMs:   5000,
+    autoShowMs:   60000
   };
   /* ────────────────────────────────────────────────────────────── */
 
   var SIDE          = CONFIG.side === 'right' ? 'right' : 'left';
-  var BUBBLE_RADIUS = SIDE === 'left' ? '16px 16px 16px 4px' : '16px 16px 4px 16px';
+  var BUBBLE_RADIUS = SIDE === 'left' ? '12px 12px 12px 3px' : '12px 12px 3px 12px';
 
   var css = `
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap');
 
 #salruyasi-wa-root {
   position: fixed;
-  bottom: 28px;
-  ${SIDE}: 28px;
+  bottom: 24px;
+  ${SIDE}: 16px;
   z-index: 99999;
   display: flex;
   flex-direction: column;
   align-items: flex-${SIDE === 'left' ? 'start' : 'end'};
-  gap: 12px;
+  gap: 8px;
   font-family: 'DM Sans', sans-serif;
 }
 
 #salruyasi-wa-bubble {
   background: #fff;
   border-radius: ${BUBBLE_RADIUS};
-  padding: 14px 18px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  max-width: 240px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  max-width: 220px;
   position: relative;
   opacity: 0;
-  transform: translateY(10px) scale(0.95);
+  transform: translateY(8px) scale(0.95);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
   border: 1px solid #f0f0f0;
@@ -54,58 +54,58 @@
 .srwa-bubble-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
   border-bottom: 1px solid #f5f5f5;
 }
 
 .srwa-avatar {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   background: linear-gradient(135deg, ${CONFIG.accentColor}, #c0306a);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 11px;
   color: #fff;
   font-weight: 700;
   flex-shrink: 0;
 }
 
-.srwa-name  { font-size: 13px; font-weight: 500; color: #111; line-height: 1.2; }
-.srwa-role  { font-size: 11px; color: #25D366; font-weight: 400; }
+.srwa-name  { font-size: 11px; font-weight: 500; color: #111; line-height: 1.2; }
+.srwa-role  { font-size: 10px; color: #25D366; font-weight: 400; }
 
 .srwa-text {
-  font-size: 13px;
-  color: #444;
-  line-height: 1.6;
+  font-size: 11px;
+  color: #555;
+  line-height: 1.5;
   font-weight: 300;
 }
 
 .srwa-text strong { color: #111; font-weight: 500; }
 
 .srwa-time {
-  font-size: 10px;
-  color: #bbb;
+  font-size: 9px;
+  color: #ccc;
   text-align: ${SIDE};
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 #salruyasi-wa-close {
   position: absolute;
-  top: -8px;
-  ${SIDE === 'left' ? 'right' : 'left'}: -8px;
-  width: 20px;
-  height: 20px;
-  background: #999;
+  top: -7px;
+  ${SIDE === 'left' ? 'right' : 'left'}: -7px;
+  width: 16px;
+  height: 16px;
+  background: #bbb;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 9px;
   color: #fff;
   line-height: 1;
   transition: background 0.2s;
@@ -116,28 +116,28 @@
 #salruyasi-wa-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   background: #25D366;
   border-radius: 50px;
-  padding: 13px 22px 13px 16px;
+  padding: 10px 18px 10px 12px;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  box-shadow: 0 4px 16px rgba(37,211,102,0.35);
   transition: all 0.25s ease;
   position: relative;
 }
 
 #salruyasi-wa-btn:hover {
   background: #1ebe5d;
-  box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+  box-shadow: 0 6px 24px rgba(37,211,102,0.5);
   transform: translateY(-2px);
 }
 
-#salruyasi-wa-btn svg { width: 26px; height: 26px; flex-shrink: 0; }
+#salruyasi-wa-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
 
 .srwa-btn-text  { display: flex; flex-direction: column; line-height: 1.2; }
-.srwa-btn-label { font-size: 11px; color: rgba(255,255,255,0.8); font-weight: 300; letter-spacing: 0.5px; }
-.srwa-btn-cta   { font-size: 14px; color: #fff; font-weight: 500; letter-spacing: 0.2px; }
+.srwa-btn-label { font-size: 10px; color: rgba(255,255,255,0.8); font-weight: 300; letter-spacing: 0.4px; }
+.srwa-btn-cta   { font-size: 12px; color: #fff; font-weight: 500; letter-spacing: 0.2px; }
 
 #salruyasi-wa-btn::before {
   content: '';
@@ -156,23 +156,32 @@
 
 @media (max-width: 768px) {
   #salruyasi-wa-root {
-    bottom: 50px;
-    ${SIDE}: 20px;
+    bottom: 70px;
+    ${SIDE}: 12px;
+    gap: 6px;
   }
 
+  #salruyasi-wa-bubble {
+    max-width: 170px;
+    padding: 8px 11px;
+  }
+
+  .srwa-avatar { width: 24px; height: 24px; font-size: 10px; }
+  .srwa-name   { font-size: 10px; }
+  .srwa-role   { font-size: 9px; }
+  .srwa-text   { font-size: 10px; line-height: 1.4; }
+  .srwa-time   { font-size: 8px; }
+
   #salruyasi-wa-btn {
-    width: 56px;
-    height: 56px;
+    width: 46px;
+    height: 46px;
     padding: 0;
     border-radius: 50%;
     justify-content: center;
   }
 
   .srwa-btn-text { display: none; }
-
-  #salruyasi-wa-btn svg { width: 28px; height: 28px; }
-
-  #salruyasi-wa-bubble { max-width: 210px; }
+  #salruyasi-wa-btn svg { width: 22px; height: 22px; }
 }
 `;
 
@@ -223,9 +232,7 @@
     clearTimeout(autoShowTimer);
     autoShowTimer = setTimeout(function () {
       showBubble();
-      /* kapandıktan 5sn sonra tekrar kapat döngüsü */
       setTimeout(function () {
-        if (!userClosed) return;
         hideBubble();
         scheduleReopen();
       }, CONFIG.autoHideMs);
@@ -244,24 +251,20 @@
     wrapper.innerHTML = html;
     document.body.appendChild(wrapper.firstElementChild);
 
-    var bubble   = document.getElementById('salruyasi-wa-bubble');
     var closeBtn = document.getElementById('salruyasi-wa-close');
     var btn      = document.getElementById('salruyasi-wa-btn');
 
-    /* 5 saniye sonra otomatik kapat */
     setTimeout(function () {
       hideBubble();
       scheduleReopen();
     }, CONFIG.autoHideMs);
 
-    /* Manuel kapatma */
     closeBtn.addEventListener('click', function () {
       userClosed = true;
       hideBubble();
       scheduleReopen();
     });
 
-    /* WhatsApp'a tıklayınca da kapat */
     btn.addEventListener('click', function () {
       userClosed = true;
       hideBubble();
