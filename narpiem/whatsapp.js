@@ -156,7 +156,7 @@
 
 @media (max-width: 768px) {
   #narpiem-wa-root {
-    bottom: 20px;
+    bottom: 60px;
     ${SIDE}: 12px;
     gap: 6px;
   }
