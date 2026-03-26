@@ -174,6 +174,11 @@ document.body.appendChild(spwDiv);
   var r = function(a,b){ return Math.floor(Math.random()*(b-a+1))+a; };
   var data = { viewers: r(40,58), cart: r(10,20), sold: r(4,10) };
   var closed = false;
+  var rotateTimer = null;
+  var current = 0;
+  var widget = document.getElementById('spw');
+  var iconEl = document.getElementById('spw-icon');
+  var track  = document.getElementById('spw-track');
 
   var messages = [
     {
@@ -199,13 +204,6 @@ document.body.appendChild(spwDiv);
     }
   ];
 
-  var current = 0;
-  var track = document.getElementById('spw-track');
-  var iconEl = document.getElementById('spw-icon');
-  var widget = document.getElementById('spw');
-  var rotateTimer = null;
-
-  // Mesaj div'lerini oluştur
   for (var i = 0; i < messages.length; i++) {
     var div = document.createElement('div');
     div.className = 'spw-msg' + (i === 0 ? ' spw-active' : '');
@@ -253,8 +251,8 @@ document.body.appendChild(spwDiv);
     widget.classList.remove('spw-off');
     widget.classList.add('spw-on');
     startRotate();
-    // 30 sn sonra gizle
-    setTimeout(hideWidget, 30000);
+    // 5 sn sonra gizle
+    setTimeout(hideWidget, 5000);
   }
 
   function hideWidget() {
@@ -262,17 +260,16 @@ document.body.appendChild(spwDiv);
     widget.classList.remove('spw-on');
     widget.classList.add('spw-off');
     stopRotate();
-    // 5 sn sonra tekrar göster
-    setTimeout(showWidget, 5000);
+    // 30 sn sonra tekrar göster
+    setTimeout(showWidget, 30000);
   }
 
-  // İçerikleri hazırla
   for (var j = 0; j < messages.length; j++) { updateContent(j); }
 
   // Sayfa açılınca 1sn sonra sağdan gir
   setTimeout(showWidget, 1000);
 
-  // Canlı viewers güncelle
+  // Canlı viewers
   setInterval(function(){
     data.viewers = Math.max(2, data.viewers + r(-4, 5));
     if (current === 0) updateContent(0);
@@ -284,7 +281,7 @@ document.body.appendChild(spwDiv);
     else        { data.sold += 1;      if (current === 2) updateContent(2); }
   }, r(10000, 18000));
 
-  // Kapat — kullanıcı kapattıysa bir daha açma
+  // Kapat — bir daha açılmaz
   document.getElementById('spw-x').addEventListener('click', function(){
     closed = true;
     stopRotate();
