@@ -196,10 +196,10 @@
   /* ── ana döngü ──
      5sn sonra gir → içerik yükle → 5sn ekranda dur → çık → 30sn bekle → tekrar
   */
-  var SHOW_DELAY  = 5000;   /* sayfa açıldıktan sonra ilk giriş */
-  var VISIBLE_DUR = 5000;   /* ekranda kalma süresi */
-  var HIDE_DUR    = 30000;  /* gizli kalma süresi */
-  var SLOT_INT    = 5000;   /* içerik değiştirme aralığı */
+  var SHOW_DELAY  = 1000;   /* sayfa açıldıktan sonra ilk giriş */
+  var VISIBLE_DUR = 10000;   /* ekranda kalma süresi */
+  var HIDE_DUR    = 20000;  /* gizli kalma süresi */
+  var SLOT_INT    = 10000;   /* içerik değiştirme aralığı */
 
   var slotTimer = null;
 
