@@ -225,10 +225,10 @@
     }, 20);
   }
 
-  var SHOW_DELAY  = 5000;
-  var VISIBLE_DUR = 5000;
-  var HIDE_DUR    = 30000;
-  var SLOT_INT    = 5000;
+  var SHOW_DELAY  = 1000;
+  var VISIBLE_DUR = 10000;
+  var HIDE_DUR    = 20000;
+  var SLOT_INT    = 3000;
   var slotTimer   = null;
 
   function startSlot() {
