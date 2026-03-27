@@ -252,7 +252,7 @@ document.body.appendChild(spwDiv);
     widget.classList.add('spw-on');
     startRotate();
     // 5 sn sonra gizle
-    setTimeout(hideWidget, 5000);
+    setTimeout(hideWidget, 10000);
   }
 
   function hideWidget() {
@@ -261,7 +261,7 @@ document.body.appendChild(spwDiv);
     widget.classList.add('spw-off');
     stopRotate();
     // 30 sn sonra tekrar göster
-    setTimeout(showWidget, 30000);
+    setTimeout(showWidget, 20000);
   }
 
   for (var j = 0; j < messages.length; j++) { updateContent(j); }
