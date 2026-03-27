@@ -199,7 +199,7 @@
   var SHOW_DELAY  = 1000;   /* sayfa açıldıktan sonra ilk giriş */
   var VISIBLE_DUR = 10000;   /* ekranda kalma süresi */
   var HIDE_DUR    = 20000;  /* gizli kalma süresi */
-  var SLOT_INT    = 300;   /* içerik değiştirme aralığı */
+  var SLOT_INT    = 3000;   /* içerik değiştirme aralığı */
 
   var slotTimer = null;
 
