@@ -156,7 +156,7 @@
 
 @media (max-width: 768px) {
   #zuum-wa-root {
-    bottom: 20px;
+    bottom: 70px;
     ${SIDE}: 12px;
     gap: 6px;
   }
