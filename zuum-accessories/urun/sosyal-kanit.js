@@ -252,7 +252,7 @@ document.body.appendChild(spwDiv);
     widget.classList.remove('spw-off');
     widget.classList.add('spw-on');
     startRotate();
-    setTimeout(hideWidget, 5000);
+    setTimeout(hideWidget, 10000);
   }
 
   function hideWidget() {
@@ -260,7 +260,7 @@ document.body.appendChild(spwDiv);
     widget.classList.remove('spw-on');
     widget.classList.add('spw-off');
     stopRotate();
-    setTimeout(showWidget, 30000);
+    setTimeout(showWidget, 20000);
   }
 
   for (var j = 0; j < messages.length; j++) { updateContent(j); }
